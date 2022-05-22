@@ -1,7 +1,7 @@
 from pyModbusTCP.client import ModbusClient
 
 ADDR = "192.168.0.188"
-PORT = 12345
+PORT = 502
 
 def main():
     client = ModbusClient(ADDR, PORT)

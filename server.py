@@ -3,7 +3,7 @@ from time import sleep
 from random import uniform 
 
 ADDR = "192.168.0.188"
-PORT = 12345
+PORT = 502
 
 def main():
     server = ModbusServer(ADDR, PORT, no_block=True)
@@ -14,7 +14,7 @@ def main():
         print("server online...")
         state = [0]
         while True:
-            DataBank.set_words(0, [int(uniform(0, 100))])
+            DataBank.set_words(0, [666])
             if state != DataBank.get_words(1):
                 state = DataBank.get_words(1)
                 print(f"Value of register 1 {state}")
