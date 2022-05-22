@@ -1,9 +1,10 @@
 from pyModbusTCP.server import ModbusServer, DataBank
 from time import sleep
 from random import uniform 
+import traceback
 
 ADDR = "192.168.0.188"
-PORT = 502
+PORT = 5502
 
 def main():
     server = ModbusServer(ADDR, PORT, no_block=True)
@@ -26,6 +27,7 @@ def main():
     except:
         print("server shutdown...")
         server.stop()
+        traceback.print_exc()
         print("server is offline")
 if __name__ == "__main__":
     main()
