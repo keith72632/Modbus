@@ -1,6 +1,6 @@
 from pyModbusTCP.server import ModbusServer, DataBank
 from time import sleep
-from random import uniform 
+from random import uniform, randint 
 import traceback
 
 ADDR = "192.168.0.188"
@@ -8,14 +8,16 @@ PORT = 5502
 
 def main():
     server = ModbusServer(ADDR, PORT, no_block=True)
-
+    discrete_inputs = []
+    for x in range(0, 100): discrete_inputs.append(randint(0, 10))
+    
     try:
         print(f"Starting server on address {ADDR} on port {PORT}")
         server.start()
         print("server online...")
         state = [0]
         while True:
-            DataBank.set_words(0, [666])
+            DataBank.set_bits(0, discrete_inputs)
             if state != DataBank.get_words(1):
                 state = DataBank.get_words(1)
                 print(f"Value of register 1 {state}")

@@ -6,7 +6,7 @@ PORT = 5502
 def main():
     client = ModbusClient(ADDR, PORT)
     client.open()
-    input = client.read_holding_registers(0)
+    input = client.read_discrete_inputs(0, 100)
     print(f"Register value {input}")
 
 if __name__ == "__main__":
