@@ -9,7 +9,9 @@ PORT = 5502
 def main():
     server = ModbusServer(ADDR, PORT, no_block=True)
     discrete_inputs = []
+    holding_registers = []
     for x in range(0, 100): discrete_inputs.append(randint(0, 10))
+    for x in range(0, 100): holding_registers.append(randint(0, 65535))
     
     try:
         print(f"Starting server on address {ADDR} on port {PORT}")
@@ -18,6 +20,7 @@ def main():
         state = [0]
         while True:
             DataBank.set_bits(0, discrete_inputs)
+            DataBank.set_words(101, holding_registers)
             if state != DataBank.get_words(1):
                 state = DataBank.get_words(1)
                 print(f"Value of register 1 {state}")
